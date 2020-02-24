@@ -5,12 +5,12 @@ import 'package:my_piggy_bank/Utils/StringsUtil.dart';
 
 import 'Object/Transaction.dart';
 
-class Details extends StatefulWidget {
+class History extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => DetailsState();
+  State<StatefulWidget> createState() => HistoryState();
 }
 
-class DetailsState extends State<Details> {
+class HistoryState extends State<History> {
   List<Transaction> _historyByCategory = [];
   String _monthValue = 'FEB';
   int _dayInMonth = 31;
@@ -111,7 +111,7 @@ class DetailsState extends State<Details> {
             },
           ),
           backgroundColor:
-              (_iconIndex == 0) ? ColorsUtil.lightBlue : ColorsUtil.green,
+              (_iconIndex == 0) ? ColorsUtil.secondaryColor : ColorsUtil.primaryColor,
           radius: 24),
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -135,7 +135,7 @@ class DetailsState extends State<Details> {
               });
             }),
         backgroundColor:
-            (_iconIndex == 1) ? ColorsUtil.lightBlue : ColorsUtil.green,
+            (_iconIndex == 1) ? ColorsUtil.secondaryColor : ColorsUtil.primaryColor,
         radius: 24,
       ),
       Padding(

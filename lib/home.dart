@@ -42,34 +42,45 @@ class HomeState extends State<Home> {
   Widget _monthDropDownButton() {
     return Container(
       alignment: Alignment.center,
-      child: DropdownButton<String>(
-        value: _monthValue,
-        icon: Icon(Icons.arrow_drop_down),
-        iconSize: 16,
-        elevation: 16,
-        onChanged: (String newMonthValue) {
-          _monthButtonOnChanged(newMonthValue);
-        },
-        items: <String>[
-          'JAN',
-          'FEB',
-          'MAR',
-          'APR',
-          'MAY',
-          'JUN',
-          'JUL',
-          'AUG',
-          'SEP',
-          'OCT',
-          'NOV',
-          'DEC'
-        ].map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-      ),
+      child:
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '${StringsUtil.monthLabel}',
+            textAlign: TextAlign.end,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+        DropdownButton<String>(
+          value: _monthValue,
+          icon: Icon(Icons.arrow_drop_down),
+          iconSize: 16,
+          elevation: 16,
+          onChanged: (String newMonthValue) {
+            _monthButtonOnChanged(newMonthValue);
+          },
+          items: <String>[
+            'JAN',
+            'FEB',
+            'MAR',
+            'APR',
+            'MAY',
+            'JUN',
+            'JUL',
+            'AUG',
+            'SEP',
+            'OCT',
+            'NOV',
+            'DEC'
+          ].map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      ]),
     );
   }
 
@@ -139,7 +150,7 @@ class HomeState extends State<Home> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       child: Card(
-          color: ColorsUtil.green,
+          color: ColorsUtil.primaryColor,
           child: Padding(
             padding: EdgeInsets.all(8),
             child: Column(

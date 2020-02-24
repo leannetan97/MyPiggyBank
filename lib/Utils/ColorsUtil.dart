@@ -21,4 +21,7 @@ class ColorsUtil {
 
   // Hex: #FFFFFF
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
+
+  static const Color primaryColor = green;
+  static const Color secondaryColor = lightBlue;
 }

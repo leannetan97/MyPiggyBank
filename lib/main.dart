@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_piggy_bank/settings.dart';
 
 import 'Utils/ColorsUtil.dart';
 import 'Utils/StringsUtil.dart';
 import 'calender.dart';
-import 'details.dart';
+import 'history.dart';
 import 'home.dart';
+import 'package:my_piggy_bank/Utils/StringsUtil.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(StringsUtil.appName),
-          backgroundColor: ColorsUtil.green,
+          backgroundColor: ColorsUtil.primaryColor,
           bottom: TabBar(
             tabs: [
               Tab(icon: Icon(Icons.calendar_today)),
@@ -45,9 +47,29 @@ class _MyHomePageState extends State<MyHomePage> {
               Tab(icon: Icon(Icons.event_note)),
             ],
           ),
+          actions: <Widget>[_settingIcon()],
         ),
-        body: TabBarView(children: <Widget>[Calender(), Home(), Details()]),
+        body: TabBarView(children: <Widget>[Calender(), Home(), History()]),
       ),
     );
   }
+
+  Widget _settingIcon(){
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(children: <Widget>[Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: IconButton(icon:Icon(Icons.settings),
+        onPressed: ()=> _navigateToSettingPage(),
+        ),
+      )]),
+    );
+//    ,Text('${StringsUtil.settingPageTitle}')
+  }
+
+  _navigateToSettingPage() {
+     Navigator.of(context).push(MaterialPageRoute<void>(settings:  RouteSettings(name: '/Settings',), builder:(context) => Settings()));
+  }
+
+
 }
