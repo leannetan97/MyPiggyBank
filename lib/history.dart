@@ -26,7 +26,7 @@ class HistoryState extends State<History> {
             if (index == 0) return _mainTitleForTransactionActivity();
             if (index == 1) return _monthDropDownButton();
             if (index == 2) return selectIcons();
-            //return _buildMainCardForOwningList(_settingNameList[index-3]);
+            //return _buildMainCardForOwingList(_settingNameList[index-3]);
             return Container();
           }),
     );

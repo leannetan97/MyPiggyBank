@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_piggy_bank/Utils/StringsUtil.dart';
+import 'package:my_piggy_bank/owing_name_list.dart';
 
 import 'Utils/ColorsUtil.dart';
+import 'category.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -24,7 +26,8 @@ class SettingsState extends State<Settings> {
           children: <Widget>[
             _defaultYearCell(),
             _defaultIncomeCell(),
-            _categoryCell()
+            _categoryCell(),
+            _nameListCell()
           ],
         )));
   }
@@ -48,6 +51,13 @@ class SettingsState extends State<Settings> {
         title: Text('${StringsUtil.categoryLabel}'),
         trailing: Icon(Icons.chevron_right, size: 16),
         onTap: () => _categoryCellOnTap());
+  }
+
+  Widget _nameListCell() {
+    return ListTile(
+        title: Text('${StringsUtil.nameListLabel}'),
+        trailing: Icon(Icons.chevron_right, size: 16),
+        onTap: () => _nameListCellOnTap());
   }
 
   _changeDefault(String title) async {
@@ -78,13 +88,15 @@ class SettingsState extends State<Settings> {
                 decoration: InputDecoration(
                     labelText: '$mainTitle',
                     hintText: '$hint',
-                    labelStyle: TextStyle(color: ColorsUtil.secondaryColor,),
+                    labelStyle: TextStyle(
+                      color: ColorsUtil.secondaryColor,
+                    ),
                     hintStyle: TextStyle(color: ColorsUtil.secondaryColor),
                     fillColor: ColorsUtil.primaryColor,
                     focusColor: ColorsUtil.primaryColor,
                     focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: ColorsUtil.primaryColor,width: 2))),
+                        borderSide: BorderSide(
+                            color: ColorsUtil.primaryColor, width: 2))),
                 cursorColor: ColorsUtil.primaryColor,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
@@ -97,9 +109,8 @@ class SettingsState extends State<Settings> {
             FlatButton(
               child: Text('${StringsUtil.save}',
                   style: TextStyle(
-                    color: ColorsUtil.primaryColor,
-                    fontWeight: FontWeight.bold
-                  )),
+                      color: ColorsUtil.primaryColor,
+                      fontWeight: FontWeight.bold)),
               onPressed: () {
                 // Save updated
                 (title == '${StringsUtil.defaultYearLabel}')
@@ -119,7 +130,9 @@ class SettingsState extends State<Settings> {
   }
 
   _navigateToCategorySetting() {
-//    Navigator.of(context).push(route);
+    Navigator.of(context).push(MaterialPageRoute<void>(
+        settings: RouteSettings(name: '${StringsUtil.categoryPageTitle}'),
+        builder: (context) => Category()));
   }
 
   String _getDefaultYear() {
@@ -133,4 +146,10 @@ class SettingsState extends State<Settings> {
   void _saveDefaultYear(String year) {}
 
   void _saveDefaultIncome(String income) {}
+
+  _nameListCellOnTap() {
+    Navigator.of(context).push(MaterialPageRoute<void>(
+        settings: RouteSettings(name: '${StringsUtil.owingNameListPage}'),
+        builder: (context) => OwingNameList()));
+  }
 }

@@ -1,27 +1,46 @@
+import 'package:my_piggy_bank/Object/CategoryItem.dart';
 import 'package:my_piggy_bank/calender.dart';
 
-class Transaction{
-  String _icon, _categoryName, _nameOweMeMoney,_nameThatIOweMoney;
-  double _amount;
-  bool _isOweBySomeone, _isOwningSomeone;
-  Calender date;
+import 'Day.dart';
+import 'Enums.dart';
 
-  Transaction(this._icon, this._categoryName, this._amount,this._isOweBySomeone,this._nameOweMeMoney,this._isOwningSomeone,this._nameThatIOweMoney);
+class Transaction{
+  double _amount;
+  CategoryItem _category;
+  String _name, _note;
+  OweType _type;
+  Day _day;
+
+  Transaction(DateTime time, this._amount,this._category,this._note,this._type, this._name){
+    _day = new Day(time);
+  }
 
   // Getter
-  get isOwningSomeone => _isOwningSomeone;
+  // Day Object
+  String get day => _day.nameOfTheDay;
 
-  bool get isOweBySomeone => _isOweBySomeone;
+  String get date => _day.date;
 
+  String get time => _day.time;
+
+  DateTime get dateTimeInDateTimeFormat => DateTime.parse('${_day.fullDateTime}');
+
+  // Amount
   double get amount => _amount;
 
-  get nameThatIOweMoney => _nameThatIOweMoney;
+  // Note
+  String get note => _note;
 
-  get nameOweMeMoney => _nameOweMeMoney;
+  // Name
+  String get name => _name;
 
-  get categoryName => _categoryName;
+  // Transaction type
+  OweType get type => _type;
 
-  String get icon => _icon;
-  // TODO: Add Date and Day
+  // Category
+  String get categoryName => _category.categoryName;
 
+  String get categoryIconCode => _category.iconCode;
+
+  bool get isCategoryCounted => _category.isCounted;
 }

@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:my_piggy_bank/Object/Enums.dart';
 import 'package:my_piggy_bank/Object/Transaction.dart';
 import 'package:my_piggy_bank/Utils/ColorsUtil.dart';
 import 'package:my_piggy_bank/Utils/StringsUtil.dart';
+
+import 'Object/CategoryItem.dart';
+import 'add_transaction.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,13 +19,69 @@ class HomeState extends State<Home> {
   double _income = 0.00, _expenses = 0.00, _balance = 0.00;
   List<String> _settingNameList = ['Hello', 'World', 'BB'];
   List<Transaction> _owingList = [
-    new Transaction("fastfood", "Food1", 234.50, true, "BB", false, ""),
-    new Transaction("", "Food2", 234.50, true, "BB", false, ""),
-    new Transaction("", "Food3", 234.50, true, "BB", false, ""),
-    new Transaction("", "Food4", 234.50, true, "BB", false, ""),
-    new Transaction("", "Food5", 234.50, true, "BB", false, ""),
-    new Transaction("", "Food7", 234.50, true, "BB", false, ""),
-    new Transaction("", "Food6", 234.50, true, "BB", false, "")
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
+    new Transaction(
+        DateTime.now(),
+        234.50,
+        new CategoryItem('0xe57a', 'Meal\n(F&B)', true),
+        '',
+        OweType.OweSomeone,
+        'BB'),
   ];
 
   @override
@@ -32,8 +92,8 @@ class HomeState extends State<Home> {
             itemBuilder: (context, index) {
               if (index == 0) return _monthDropDownButton();
               if (index == 1) return _summaryStatusCard();
-              if (index == 2) return _buildTitleForOwningList();
-              return _buildMainCardForOwningList(_settingNameList[index-3]);
+              if (index == 2) return _buildTitleForOwingList();
+              return _buildMainCardForOwingList(_settingNameList[index - 3]);
             }),
         floatingActionButton: _addFloatingButton());
   }
@@ -43,7 +103,7 @@ class HomeState extends State<Home> {
     return Container(
       alignment: Alignment.center,
       child:
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -137,16 +197,16 @@ class HomeState extends State<Home> {
     );
   }
 
-  Widget _buildTitleForOwningList() {
+  Widget _buildTitleForOwingList() {
     return Center(
       child: Text(
-        '${StringsUtil.owningListTitle}',
+        '${StringsUtil.owingListTitle}',
         style: TextStyle(color: ColorsUtil.blueViolet, fontSize: 20.0),
       ),
     );
   }
 
-  Widget _buildMainCardForOwningList(String name) {
+  Widget _buildMainCardForOwingList(String name) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       child: Card(
@@ -155,7 +215,7 @@ class HomeState extends State<Home> {
             padding: EdgeInsets.all(8),
             child: Column(
               children: <Widget>[
-                _buildMainCardTitleForOwningList(name),
+                _buildMainCardTitleForOwingList(name),
                 _buildCardForTransaction()
               ],
             ),
@@ -163,50 +223,73 @@ class HomeState extends State<Home> {
     );
   }
 
-  Widget _buildMainCardTitleForOwningList(String name) {
+  Widget _buildMainCardTitleForOwingList(String name) {
     double debt = _calculatePayBack();
-    return Padding(padding:EdgeInsets.symmetric(vertical: 8,horizontal: 16),child:Row(children: <Widget>[
-      Expanded(child:  Text(name, style: TextStyle(color: ColorsUtil.white, fontWeight: FontWeight.bold))),
-      Text(
-        '${StringsUtil.paybackLabel} $debt',
-        textAlign: TextAlign.end,
-        style: TextStyle(color: ColorsUtil.white, fontWeight: FontWeight.bold),
-      )
-    ]));
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        child: Row(children: <Widget>[
+          Expanded(
+              child: Text(name,
+                  style: TextStyle(
+                      color: ColorsUtil.white, fontWeight: FontWeight.bold))),
+          Text(
+            '${StringsUtil.paybackLabel} $debt',
+            textAlign: TextAlign.end,
+            style:
+                TextStyle(color: ColorsUtil.white, fontWeight: FontWeight.bold),
+          )
+        ]));
   }
 
   Widget _buildCardForTransaction() {
     return Card(
         child: Padding(
             padding: EdgeInsets.all(8.0),
-            child:Column(
+            child: Column(
               children: [
-                for ( var trans in _owingList) _rowShowingTransaction(trans.icon,trans.categoryName, trans.amount)
+                for (var trans in _owingList) _rowShowingTransaction(trans)
               ],
             )));
-
-
   }
 
-  Widget _rowShowingTransaction(String icon, String category, double amount) {
+  Widget _rowShowingTransaction(Transaction t) {
     return Container(
         padding: EdgeInsets.all(8),
         child: Row(children: <Widget>[
-          Icon(Icons.fastfood, size: 16),
+          Text(
+            t.date,
+            style: Theme.of(context).textTheme.caption,
+          ),
+          Text(
+            ' (${t.day})  ',
+            style: Theme.of(context).textTheme.caption,
+          ),
+          Icon(
+            IconData(
+              int.parse(t.categoryIconCode),
+              fontFamily: 'MaterialIcons',
+            ),
+            size: 16,
+            color: ColorsUtil.black,
+          ),
           Expanded(
               child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(category),
+            child: Text((t.categoryName).replaceAll(new RegExp(r'\n'), ' ')),
           )),
-          Text(amount.toString(), textAlign: TextAlign.end)
+          Text(
+            t.amount.toString(),
+            textAlign: TextAlign.end,
+            maxLines: 2,
+          )
         ]));
   }
 
   Widget _addFloatingButton() {
-    return FloatingActionButton(
-      onPressed: _newTransaction(),
+    return FloatingActionButton(child: Icon(Icons.add),
+        backgroundColor: ColorsUtil.secondaryColor,
+      onPressed: () => _newTransactionIsPressed(),
       tooltip: StringsUtil.transactionTooltip,
-      child: Icon(Icons.add),
     );
   }
 
@@ -214,11 +297,21 @@ class HomeState extends State<Home> {
     return 0.0;
   }
 
-  _newTransaction() {}
+  _newTransactionIsPressed() {
+    _navigateToAddNewTransaction();
+  }
 
   void _monthButtonOnChanged(String newMonthValue) {
     setState(() {
       _monthValue = newMonthValue;
     });
+  }
+
+  _navigateToAddNewTransaction() {
+    Navigator.of(context).push(MaterialPageRoute<void>(
+        settings: RouteSettings(
+          name: '${StringsUtil.addTransactionPage}',
+        ),
+        builder: (context) => AddTransaction()));
   }
 }

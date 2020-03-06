@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_piggy_bank/Utils/ColorsUtil.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Calender extends StatefulWidget{

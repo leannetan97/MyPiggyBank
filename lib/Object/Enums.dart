@@ -1,0 +1,1 @@
+enum OweType { None, OweSomeone, OweBySomeone }

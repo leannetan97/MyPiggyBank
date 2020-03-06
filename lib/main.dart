@@ -20,6 +20,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
+      routes: {
+        '/home': (context) => new MyHomePage(),
+      },
     );
   }
 }
@@ -58,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: Row(children: <Widget>[Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal:8.0),
         child: IconButton(icon:Icon(Icons.settings),
         onPressed: ()=> _navigateToSettingPage(),
         ),
@@ -68,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _navigateToSettingPage() {
-     Navigator.of(context).push(MaterialPageRoute<void>(settings:  RouteSettings(name: '/Settings',), builder:(context) => Settings()));
+     Navigator.of(context).push(MaterialPageRoute<void>(settings:  RouteSettings(name: '${StringsUtil.settingsPage}',), builder:(context) => Settings()));
   }
 
 
